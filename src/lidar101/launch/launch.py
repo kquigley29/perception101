@@ -4,11 +4,19 @@ from ament_index_python.packages import get_package_share_directory
 
 
 def generate_launch_description():
-    perception_meta_dir = get_package_share_directory('perception_meta')
+    velodyne_driver_share = get_package_share_directory('velodyne_driver')
+    velodyne_pc_share = get_package_share_directory(("velodyne_pointcloud"))
+    perception_meta_share = get_package_share_directory('perception_meta')
     lidar101_share = get_package_share_directory('lidar101')
 
-    bag = launch.actions.IncludeLaunchDescription(
-        launch.launch_description_sources.PythonLaunchDescriptionSource([perception_meta_dir + '/launch/fsuk18.launch.py']),
+    velodyne_driver = launch.actions.IncludeLaunchDescription(
+        launch.launch_description_sources.PythonLaunchDescriptionSource([velodyne_driver_share + '/launch/velodyne_driver_node-VLP16-launch.py']))
+
+    velodyne_pc = launch.actions.IncludeLaunchDescription(
+        launch.launch_description_sources.PythonLaunchDescriptionSource([velodyne_pc_share + '/launch/velodyne_convert_node-VLP16-launch.py']))
+
+    tf = launch.actions.IncludeLaunchDescription(
+        launch.launch_description_sources.PythonLaunchDescriptionSource([perception_meta_share + '/misc_files/publish_transforms.launch.py']),
         launch_arguments={'robot_name': 'wheelchair'}.items()
     )
 
@@ -30,7 +38,9 @@ def generate_launch_description():
     )
 
     ld = launch.LaunchDescription([
-        bag,
+        velodyne_driver,
+        velodyne_pc,
+        # tf,
         lidar101_node,
         rviz2
     ])
