@@ -34,18 +34,18 @@ include_directories(
         ${rclcpp_INCLUDE_DIRS}
         )
 
-add_executable(${PROJECT_NAME}
+add_library(${PROJECT_NAME}_lib
         src/lidar101.cpp
         )
 
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(${PROJECT_NAME}_lib
         ${PCL_LIBRARIES}
         )
 
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 
-ament_target_dependencies(${PROJECT_NAME}
+ament_target_dependencies(${PROJECT_NAME}_lib
         rclcpp
         sensor_msgs
         tf2
@@ -56,6 +56,12 @@ ament_target_dependencies(${PROJECT_NAME}
         pcl_ros
         )
 
+add_executable(${PROJECT_NAME}
+        src/lidar101_node.cpp
+        )
+
+target_link_libraries(${PROJECT_NAME}
+        ${PROJECT_NAME}_lib)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION lib/${PROJECT_NAME})
 install(DIRECTORY include/ DESTINATION include)

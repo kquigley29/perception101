@@ -19,10 +19,8 @@
 #include <pcl_conversions/pcl_conversions.h>
 
 // pcl
-#include <pcl/PCLPointCloud2.h>
-#include <pcl/conversions.h>
 #include <pcl/common/common.h>
-#include <pcl/point_types.h>
+#include <pcl/conversions.h>
 
 
 namespace lidar101 {
@@ -33,22 +31,23 @@ namespace lidar101 {
 
     private:
         // callback to receive and work on point cloud data
-        void callback(const sensor_msgs::msg::PointCloud2::SharedPtr msg);
+        void velodyne_callback(const sensor_msgs::msg::PointCloud2::SharedPtr msg);
 
         // publishers and subscribers
         rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pub_;
         rclcpp::Subscription<sensor_msgs::msg::PointCloud2>::SharedPtr sub_;
+        rclcpp::Subscription<rcl_interfaces::msg::ParameterEvent>::SharedPtr param_sub_;
 
-    // Transforms
-    rclcpp::Clock::SharedPtr clock;
-    std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
-    std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
+        // Transforms
+        rclcpp::Clock::SharedPtr clock;
+        std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
+        std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
 
         // params
         float RADIUS_;
         std::string base_footprint_frame_;
 
-        void update_params();
+        void parameter_callback(const rcl_interfaces::msg::ParameterEvent::SharedPtr event);
     };
 
 } // lidar101
