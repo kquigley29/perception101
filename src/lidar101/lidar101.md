@@ -1,5 +1,5 @@
-#Exercise 1
-##Creating a node and processing a pointcloud
+# Exercise 1
+## Creating a node and processing a pointcloud
 
 1) Clone the repository
 2) Look through `CMakeLists.txt` and familiarise yourself with all the commands
@@ -9,7 +9,7 @@
 6) Follow the instructions in the comments of `lidar101.cpp`, ask any questions if you're stuck
 7) Finally initiate the node in the main function, follow the instructions in `lidar101_node.cpp`
 
-    ####Overview of `Lidar101`
+    #### Overview of `Lidar101`
     - We create a Lidar class which inherits from a `rclcpp::Node`. 
     - The node must create a subscriber to the `/velodyne_points` topic - this contains pointcloud messages
     - The node must create a publisher to a topic name to publish the manipulated pointcloud
