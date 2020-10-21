@@ -1,0 +1,8 @@
+lidar101:
+  ros__parameters:
+
+    subscription_topic: /velodyne_points
+
+    frame_to_publish_in: base_footprint
+
+    radius: 10.0
