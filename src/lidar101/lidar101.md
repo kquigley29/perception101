@@ -21,4 +21,4 @@
 Useful Links:
 - [PointCloudLibrary Documentation](https://pointclouds.org/documentation/)
 - [CMake wiki](https://gitlab.kitware.com/cmake/community/-/wikis/Home)
-- The lidar_grid source code! Lots of it is transferable to this exercise, make sure to understand the code you copy, ask about anything you don't understand
+- The `lidar_grid` source code! Lots of it is transferable to this exercise, make sure to understand the code you copy, ask about anything you don't understand
