@@ -27,10 +27,10 @@ Lidar::Lidar()
                                                                     queue_size,
                                                                     cb);
 
-//    // transforms
-//    clock = std::make_shared<rclcpp::Clock>(RCL_ROS_TIME);
-//    tf_buffer_ = std::make_unique<tf2_ros::Buffer>(clock);
-//    tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
+    // transforms
+    clock = std::make_shared<rclcpp::Clock>(RCL_ROS_TIME);
+    tf_buffer_ = std::make_unique<tf2_ros::Buffer>(clock);
+    tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
 }
 
 
@@ -45,16 +45,16 @@ void Lidar::callback(const sensor_msgs::msg::PointCloud2::SharedPtr msg)
     // update the parameters
     this->update_params();
 
-//    // transform message into base footprint frame
-//    // convert the message to a point cloud
-//    sensor_msgs::msg::PointCloud2 transformed_msg;
-//    pcl_ros::transformPointCloud(this->base_footprint_frame_, *msg, transformed_msg, *tf_buffer_);
-//    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
-//    pcl::fromROSMsg(transformed_msg, *cloud);
-
+    // transform message into base footprint frame
     // convert the message to a point cloud
+    sensor_msgs::msg::PointCloud2 transformed_msg;
+    pcl_ros::transformPointCloud(this->base_footprint_frame_, *msg, transformed_msg, *tf_buffer_);
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
-    pcl::fromROSMsg(*msg, *cloud);
+    pcl::fromROSMsg(transformed_msg, *cloud);
+
+//    // convert the message to a point cloud
+//    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
+//    pcl::fromROSMsg(*msg, *cloud);
 
     // get the points within the radius and add them to close_points
     pcl::PointCloud<pcl::PointXYZ>::Ptr close_points(new pcl::PointCloud<pcl::PointXYZ>);
