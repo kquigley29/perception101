@@ -2,7 +2,7 @@
 ## Creating a node and processing a pointcloud
 
 1) Clone the repository
-2) Look through `CMakeLists.txt` and familiarise yourself with all the commands
+2) Look through `package.xml` and `CMakeLists.txt` and familiarise yourself with the content
 3) Look at `include/lidar101.h`. This is a cpp header file for the `lidar101` node and contains the declarations for the Lidar class to use.
 4) Follow the instructions in the comments of `lidar101.h`, ask any questions if you can't do anything
 5) Look at `src/lidar101.cpp`, this contains the implementations of what you declared in the header file
