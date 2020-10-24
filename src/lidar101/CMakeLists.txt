@@ -73,7 +73,7 @@ target_link_libraries(${PROJECT_NAME}
 
 # installs all targets and required files (launch, config etc.) to the required
 # destinations for ROS2 to access.
-install(TARGETS ${PROJECT_NAME}_lib DESTINATION lib/${PROJECT_NAME})
+install(TARGETS ${PROJECT_NAME} DESTINATION lib/${PROJECT_NAME})
 install(DIRECTORY include/ DESTINATION include)
 install(DIRECTORY
         launch
